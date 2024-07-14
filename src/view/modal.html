@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modal Example</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .no-scroll {
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+    <!-- Modal Background Overlay -->
+    <div id="modal-overlay" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <!-- Modal Content -->
+        <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md mx-auto">
+            <div class="flex justify-between items-center mb-4">
+                <h4 class="text-lg font-semibold">Modal Title</h4>
+                <button id="close-modal" class="text-gray-500 hover:text-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div class="mb-4">
+                <p class="text-gray-700">This is the modal content. You can put any HTML content here.</p>
+            </div>
+            <div class="flex justify-end">
+                <button id="confirm-action" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Trigger Button -->
+    <button id="open-modal" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+        Open Modal
+    </button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const modalOverlay = document.getElementById('modal-overlay');
+            const openModalBtn = document.getElementById('open-modal');
+            const closeModalBtn = document.getElementById('close-modal');
+            const confirmActionBtn = document.getElementById('confirm-action');
+
+            openModalBtn.addEventListener('click', () => {
+                modalOverlay.classList.remove('hidden');
+                document.body.classList.add('no-scroll');
+            });
+
+            closeModalBtn.addEventListener('click', () => {
+                modalOverlay.classList.add('hidden');
+                document.body.classList.remove('no-scroll');
+            });
+
+            modalOverlay.addEventListener('click', (e) => {
+                if (e.target === modalOverlay) {
+                    modalOverlay.classList.add('hidden');
+                    document.body.classList.remove('no-scroll');
+                }
+            });
+
+            confirmActionBtn.addEventListener('click', () => {
+                // Add your confirmation action here
+                modalOverlay.classList.add('hidden');
+                document.body.classList.remove('no-scroll');
+            });
+        });
+    </script>
+
+</body>
+</html>
